@@ -42,15 +42,30 @@
 // });
 
 
-// Events Module
+// // Events Module
+
+// const EventEmitter = require('events');
+// const emitter = new EventEmitter();
+
+// // Regiter a listener (with event argument)
+// emitter.on('messageLogged', function(arg){
+//   console.log('Listener called', arg)
+// });
+
+// // Raise an event (with a Event Argument)
+// emitter.emit('messageLogged', { id:1, url: 'http://' });
+
+
+// Extending Event Emitter
 
 const EventEmitter = require('events');
-const emitter = new EventEmitter();
 
-// Regiter a listener
-emitter.on('messageLogged', function(){
-  console.log('Listener called')
+const Logger = require('./logger');
+const logger = new Logger;
+
+// Regiter a listener (with event argument)
+logger.on('messageLogged', (arg) => {
+  console.log('Listener called', arg)
 });
 
-// Raise an event
-emitter.emit('messageLogged');
+logger.log('message');
