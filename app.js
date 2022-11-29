@@ -56,16 +56,37 @@
 // emitter.emit('messageLogged', { id:1, url: 'http://' });
 
 
-// Extending Event Emitter
+// // Extending Event Emitter
 
-const EventEmitter = require('events');
+// const EventEmitter = require('events');
 
-const Logger = require('./logger');
-const logger = new Logger;
+// const Logger = require('./logger');
+// const logger = new Logger;
 
-// Regiter a listener (with event argument)
-logger.on('messageLogged', (arg) => {
-  console.log('Listener called', arg)
+// // Regiter a listener (with event argument)
+// logger.on('messageLogged', (arg) => {
+//   console.log('Listener called', arg)
+// });
+
+// logger.log('message');
+
+
+// HTTP MODULE
+
+const http = require ('http');
+
+const server = http.createServer((request, response) => {
+  if (request.url === '/') {
+    response.write('Hello World');
+    response.end();
+  }
+
+  if (request.url === '/api/courses') {
+    response.write(JSON.stringify([1, 2, 3]))
+    response.end();
+  }
 });
 
-logger.log('message');
+server.listen(3000);
+
+console.log('Listening on port 3000...');
